@@ -2045,9 +2045,9 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;color:inhe
   /* Catering form */
   .cat-form-section{margin-top:28px}
   .cat-form{padding:18px 16px}
-  .cat-form-card .res-success{padding:28px 16px}
-  .cat-form-card .res-success h3{font-size:20px}
-  .cat-form-card .res-success-ring{width:64px;height:64px}
+  #catSuccess{padding:28px 16px}
+  #catSuccess h3{font-size:20px}
+  #catSuccess .res-success-ring{width:64px;height:64px}
 
   /* Reservation success */
   .res-card .res-success{padding:28px 16px}

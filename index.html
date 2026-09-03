@@ -662,61 +662,11 @@
     </div>
   </div>
 
-  <!-- Catering inquiry form -->
-  <div class="section-wrap cat-form-section">
-    <div class="cat-form-card reveal" id="cateringForm">
-
-      <div class="res-card-header">
-        <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M11 9H9V2H7v7H5V2H3v7c0 2.12 1.66 3.84 3.75 3.97V22h2.5v-9.03C11.34 12.84 13 11.12 13 9V2h-2v7zm5-3v8h2.5v8H21V2c-2.76 0-5 2.24-5 4z"/></svg>
-        <span>Catering Enquiry</span>
-      </div>
-
-      <div id="catFormWrap">
-        <form class="res-form cat-form" id="cateringInquiryForm">
-          <div class="form-row">
-            <div class="res-field">
-              <label for="catName">Your Name</label>
-              <input type="text" id="catName" name="name" placeholder="Full name" required />
-            </div>
-            <div class="res-field">
-              <label for="catEmail">Email Address</label>
-              <input type="email" id="catEmail" name="email" placeholder="you@email.com" required />
-            </div>
-          </div>
-          <div class="res-field">
-            <label for="catSubject">Event Type</label>
-            <input type="text" id="catSubject" name="subject" placeholder="Birthday party, wedding, corporate lunch&hellip;" required />
-          </div>
-          <div class="res-field">
-            <label for="catDetails">Event Details</label>
-            <textarea id="catDetails" name="eventDetails" rows="4" placeholder="Tell us your date, number of guests, venue, menu preferences&hellip;" required></textarea>
-          </div>
-
-          <div class="res-error" id="catError" hidden>
-            <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/></svg>
-            Something went wrong. Please call <a href="tel:+16782935779">(678) 293-5779</a>.
-          </div>
-
-          <button type="submit" class="btn btn-primary res-submit" id="catSubmitBtn">
-            <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/></svg>
-            <span id="catSubmitLabel">Send Enquiry</span>
-          </button>
-        </form>
-      </div>
-
-      <!-- success state -->
-      <div class="res-success" id="catSuccess" hidden>
-        <div class="res-success-ring">
-          <svg viewBox="0 0 24 24" width="36" height="36" fill="currentColor"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/></svg>
-        </div>
-        <p class="res-success-tag">Enquiry Received</p>
-        <h3>Thanks, <span id="catSuccessName"></span>!</h3>
-        <p class="res-success-sub">We&rsquo;ll get back to you with a custom quote shortly.</p>
-        <p class="res-success-note">Questions? <a href="tel:+16782935779">(678) 293-5779</a></p>
-        <button class="btn btn-ghost res-reset-btn" id="catResetBtn">Send another enquiry</button>
-      </div>
-
-    </div>
+  <div class="section-wrap center reveal" style="padding-top:0;margin-top:48px">
+    <a href="#contact" class="btn btn-primary">
+      <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/></svg>
+      Send a Catering Enquiry
+    </a>
   </div>
 </section>
 
@@ -1230,18 +1180,49 @@
         </li>
       </ul>
 
-      <form class="contact-form" id="contactForm">
-        <div class="form-row">
-          <input type="text" id="contactName" placeholder="Your Name" required />
-          <input type="email" id="contactEmail" placeholder="Email Address" required />
+      <div id="catFormWrap">
+        <form class="res-form cat-form" id="cateringInquiryForm">
+          <div class="form-row">
+            <div class="res-field">
+              <label for="catName">Your Name</label>
+              <input type="text" id="catName" name="name" placeholder="Full name" required />
+            </div>
+            <div class="res-field">
+              <label for="catEmail">Email Address</label>
+              <input type="email" id="catEmail" name="email" placeholder="you@email.com" required />
+            </div>
+          </div>
+          <div class="res-field">
+            <label for="catSubject">Event Type</label>
+            <input type="text" id="catSubject" name="subject" placeholder="Birthday party, wedding, corporate lunch&hellip;" required />
+          </div>
+          <div class="res-field">
+            <label for="catDetails">Event Details</label>
+            <textarea id="catDetails" name="eventDetails" rows="4" placeholder="Tell us your date, number of guests, venue, menu preferences&hellip;" required></textarea>
+          </div>
+
+          <div class="res-error" id="catError" hidden>
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/></svg>
+            Something went wrong. Please call <a href="tel:+16782935779">(678) 293-5779</a>.
+          </div>
+
+          <button type="submit" class="btn btn-primary res-submit" id="catSubmitBtn">
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/></svg>
+            <span id="catSubmitLabel">Send Enquiry</span>
+          </button>
+        </form>
+      </div>
+
+      <div class="res-success" id="catSuccess" hidden>
+        <div class="res-success-ring">
+          <svg viewBox="0 0 24 24" width="36" height="36" fill="currentColor"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/></svg>
         </div>
-        <input type="text" id="contactSubject" placeholder="Event Type (Birthday, Wedding, Corporate…)" required />
-        <textarea id="contactMessage" rows="4" placeholder="Tell us your date, number of guests, venue, menu preferences…" required></textarea>
-        <button type="submit" class="btn btn-primary" id="contactSubmitBtn">
-          <span id="contactSubmitLabel">Send Catering Enquiry</span>
-        </button>
-      </form>
-      <p class="contact-form-status" id="contactStatus" hidden></p>
+        <p class="res-success-tag">Enquiry Received</p>
+        <h3>Thanks, <span id="catSuccessName"></span>!</h3>
+        <p class="res-success-sub">We&rsquo;ll get back to you with a custom quote shortly.</p>
+        <p class="res-success-note">Questions? <a href="tel:+16782935779">(678) 293-5779</a></p>
+        <button class="btn btn-ghost res-reset-btn" id="catResetBtn">Send another enquiry</button>
+      </div>
     </div>
 
     <div class="contact-map reveal">

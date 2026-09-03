@@ -532,47 +532,6 @@ if (cateringForm) {
   });
 }
 
-/* ---------- Contact section — Catering Enquiry ---------- */
-const contactForm = document.getElementById('contactForm');
-if (contactForm) {
-  contactForm.addEventListener('submit', async function (e) {
-    e.preventDefault();
-
-    const name         = document.getElementById('contactName').value.trim();
-    const email        = document.getElementById('contactEmail').value.trim();
-    const subject      = document.getElementById('contactSubject').value.trim();
-    const eventDetails = document.getElementById('contactMessage').value.trim();
-
-    const btn    = document.getElementById('contactSubmitBtn');
-    const label  = document.getElementById('contactSubmitLabel');
-    const status = document.getElementById('contactStatus');
-
-    btn.disabled      = true;
-    label.textContent = 'Sending…';
-    status.hidden     = true;
-
-    try {
-      fetch(RESERVATION_SCRIPT_URL, {
-        method: 'POST',
-        mode:   'no-cors',
-        body:   JSON.stringify({ type: 'catering', name, email, subject, eventDetails })
-      });
-      await new Promise(r => setTimeout(r, 600));
-
-      contactForm.reset();
-      status.textContent = '✓ Enquiry received! We\'ll get back to you with a custom quote shortly.';
-      status.className   = 'contact-form-status ok';
-      status.hidden      = false;
-    } catch {
-      status.textContent = 'Something went wrong. Please call (678) 293-5779.';
-      status.className   = 'contact-form-status err';
-      status.hidden      = false;
-    } finally {
-      btn.disabled      = false;
-      label.textContent = 'Send Catering Enquiry';
-    }
-  });
-}
 
 document.getElementById('catResetBtn')?.addEventListener('click', function () {
   const form = document.getElementById('cateringInquiryForm');
