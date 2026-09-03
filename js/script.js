@@ -532,16 +532,16 @@ if (cateringForm) {
   });
 }
 
-/* ---------- Contact form (Send Message) ---------- */
+/* ---------- Contact section — Catering Enquiry ---------- */
 const contactForm = document.getElementById('contactForm');
 if (contactForm) {
   contactForm.addEventListener('submit', async function (e) {
     e.preventDefault();
 
-    const name    = document.getElementById('contactName').value.trim();
-    const email   = document.getElementById('contactEmail').value.trim();
-    const subject = document.getElementById('contactSubject').value.trim();
-    const message = document.getElementById('contactMessage').value.trim();
+    const name         = document.getElementById('contactName').value.trim();
+    const email        = document.getElementById('contactEmail').value.trim();
+    const subject      = document.getElementById('contactSubject').value.trim();
+    const eventDetails = document.getElementById('contactMessage').value.trim();
 
     const btn    = document.getElementById('contactSubmitBtn');
     const label  = document.getElementById('contactSubmitLabel');
@@ -555,12 +555,12 @@ if (contactForm) {
       fetch(RESERVATION_SCRIPT_URL, {
         method: 'POST',
         mode:   'no-cors',
-        body:   JSON.stringify({ type: 'contact', name, email, subject, message })
+        body:   JSON.stringify({ type: 'catering', name, email, subject, eventDetails })
       });
       await new Promise(r => setTimeout(r, 600));
 
       contactForm.reset();
-      status.textContent = '✓ Message sent! We\'ll get back to you shortly.';
+      status.textContent = '✓ Enquiry received! We\'ll get back to you with a custom quote shortly.';
       status.className   = 'contact-form-status ok';
       status.hidden      = false;
     } catch {
@@ -569,7 +569,7 @@ if (contactForm) {
       status.hidden      = false;
     } finally {
       btn.disabled      = false;
-      label.textContent = 'Send Message';
+      label.textContent = 'Send Catering Enquiry';
     }
   });
 }
