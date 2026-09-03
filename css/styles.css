@@ -1862,7 +1862,7 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;color:inhe
   .nav-links.open{right:0}
   .nav-link{font-size:17px;padding:10px 20px}
   .hamburger{display:flex;z-index:110}
-  .nav-cta{display:none}
+  .nav-cta,.nav-review{display:none}
 
   /* Mobile nav backdrop */
   .nav-backdrop{
@@ -2716,31 +2716,31 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;color:inhe
 .review-cta{
   position:relative;overflow:hidden;
   background:var(--cream);
-  padding:80px var(--pad);
+  padding:52px var(--pad);
 }
 /* Soft decorative blobs */
 .review-cta-blob{
   position:absolute;border-radius:50%;
   background:var(--rust-2);opacity:.08;pointer-events:none;
 }
-.review-cta-blob-1{width:380px;height:380px;top:-120px;right:-80px}
-.review-cta-blob-2{width:240px;height:240px;bottom:-80px;left:-60px}
+.review-cta-blob-1{width:320px;height:320px;top:-100px;right:-60px}
+.review-cta-blob-2{width:200px;height:200px;bottom:-70px;left:-50px}
 
 .review-cta-inner{
   position:relative;z-index:1;
-  display:flex;align-items:center;justify-content:space-between;gap:48px;
+  display:flex;flex-direction:column;align-items:center;
+  text-align:center;gap:20px;
 }
-.review-cta-copy{flex:1}
 .review-cta-copy .eyebrow{color:var(--rust-2)}
 .review-cta-heading{
   font-family:var(--font-brand);
-  font-size:clamp(26px,4vw,52px);
+  font-size:clamp(22px,3.5vw,40px);
   font-weight:900;
   letter-spacing:.04em;
   text-transform:uppercase;
-  line-height:1.1;
+  line-height:1.15;
   color:#111;
-  margin:14px 0 28px;
+  margin:8px 0 16px;
 }
 .review-cta-heading em{font-style:normal;color:var(--rust-2)}
 
@@ -2794,11 +2794,10 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;color:inhe
 
 /* Responsive */
 @media(max-width:768px){
-  .review-cta-inner{flex-direction:column;text-align:center;gap:36px}
-  .review-cta{padding:60px var(--pad)}
-  .review-cta-blob-1{width:260px;height:260px;top:-80px;right:-60px}
-  .review-cta-blob-2{width:160px;height:160px;bottom:-50px;left:-40px}
+  .review-cta{padding:40px var(--pad)}
+  .review-cta-blob-1{width:200px;height:200px;top:-60px;right:-40px}
+  .review-cta-blob-2{width:140px;height:140px;bottom:-40px;left:-30px}
 }
 @media(max-width:480px){
-  .review-cta{padding:48px var(--pad)}
+  .review-cta{padding:32px var(--pad)}
 }
