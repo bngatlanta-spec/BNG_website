@@ -2706,3 +2706,96 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;color:inhe
   .res-success{padding:36px 20px}
   .res-success h3{font-size:22px}
 }
+
+/* ============================================================
+   REVIEW CTA
+   ============================================================ */
+.review-cta{
+  position:relative;overflow:hidden;
+  background:var(--cream);
+  padding:80px var(--pad);
+}
+/* Soft decorative blobs */
+.review-cta-blob{
+  position:absolute;border-radius:50%;
+  background:var(--rust-2);opacity:.08;pointer-events:none;
+}
+.review-cta-blob-1{width:380px;height:380px;top:-120px;right:-80px}
+.review-cta-blob-2{width:240px;height:240px;bottom:-80px;left:-60px}
+
+.review-cta-inner{
+  position:relative;z-index:1;
+  display:flex;align-items:center;justify-content:space-between;gap:48px;
+}
+.review-cta-copy{flex:1}
+.review-cta-copy .eyebrow{color:var(--rust-2)}
+.review-cta-heading{
+  font-family:var(--font-brand);
+  font-size:clamp(26px,4vw,52px);
+  font-weight:900;
+  letter-spacing:.04em;
+  text-transform:uppercase;
+  line-height:1.1;
+  color:#111;
+  margin:14px 0 28px;
+}
+.review-cta-heading em{font-style:normal;color:var(--rust-2)}
+
+/* ── Review button ── */
+.review-btn{
+  display:inline-flex;align-items:center;gap:0;
+  background:#111;border-radius:999px;overflow:hidden;
+  text-decoration:none;
+  transition:transform .25s var(--ease),box-shadow .25s var(--ease);
+}
+.review-btn:hover{
+  transform:translateY(-3px);
+  box-shadow:0 14px 36px rgba(0,0,0,.3);
+}
+@media(prefers-reduced-motion:reduce){
+  .review-btn{transition:none}
+  .review-btn:hover{transform:none;box-shadow:none}
+}
+.review-btn:focus-visible{
+  outline:3px solid var(--gold);outline-offset:3px;
+}
+.review-btn-badge{
+  display:flex;align-items:center;justify-content:center;
+  width:48px;height:48px;flex-shrink:0;
+  background:var(--rust-2);color:#fff;
+}
+.review-btn-label{
+  padding:0 22px 0 16px;
+  font-family:var(--font-body);
+  font-size:13px;font-weight:700;
+  letter-spacing:.09em;text-transform:uppercase;
+  color:#fff;white-space:nowrap;
+}
+
+/* SM modifier */
+.review-btn-sm .review-btn-badge{width:34px;height:34px}
+.review-btn-sm .review-btn-label{font-size:11px;padding:0 14px 0 12px}
+
+/* ── QR card ── */
+.review-qr-card{
+  background:#fff;border-radius:20px;
+  padding:24px;text-align:center;
+  box-shadow:0 8px 32px rgba(0,0,0,.1);
+  flex-shrink:0;
+}
+.review-qr-label{
+  font-size:11px;font-weight:700;letter-spacing:.08em;
+  text-transform:uppercase;color:#888;margin-bottom:14px;
+}
+.review-qr-img{display:block;border-radius:8px}
+
+/* Responsive */
+@media(max-width:768px){
+  .review-cta-inner{flex-direction:column;text-align:center;gap:36px}
+  .review-cta{padding:60px var(--pad)}
+  .review-cta-blob-1{width:260px;height:260px;top:-80px;right:-60px}
+  .review-cta-blob-2{width:160px;height:160px;bottom:-50px;left:-40px}
+}
+@media(max-width:480px){
+  .review-cta{padding:48px var(--pad)}
+}

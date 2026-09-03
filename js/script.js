@@ -18,6 +18,14 @@
    ============================================================ */
 const SPECIALS_SHEET_URL = 'https://script.google.com/macros/s/AKfycby0SuBSdRwbCsqC-DrsGHtaz0FEL-U31KnpwwV4paF8gvY6udX-SrgYSvuao8CzlhGMUg/exec';
 
+// ── Google Review link — change this one value to update every button & QR code
+const REVIEW_URL = 'https://g.page/r/PASTE_YOUR_GOOGLE_REVIEW_LINK_HERE/review';
+
+// Wire review buttons and QR code to REVIEW_URL
+document.querySelectorAll('.review-link').forEach(el => { el.href = REVIEW_URL; });
+const reviewQr = document.getElementById('reviewQr');
+if (reviewQr) reviewQr.src = `https://api.qrserver.com/v1/create-qr-code/?size=150x150&margin=12&color=111111&bgcolor=ffffff&data=${encodeURIComponent(REVIEW_URL)}`;
+
 function parseCSV(text) {
   const lines = text.replace(/\r/g, '').trim().split('\n');
   if (lines.length < 2) return [];
