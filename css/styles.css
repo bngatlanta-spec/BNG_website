@@ -2744,10 +2744,12 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;color:inhe
 .review-cta-rating .rating-num{color:#111;font-size:56px}
 .review-cta-rating .rating-stars{color:var(--rust-2)}
 .review-cta-rating .rating-count{color:#666}
-.review-cta-rating .bar-row{color:#444}
+.review-cta-rating .bar-row,.review-cta-rating .bar-row-link{color:#444}
 .review-cta-rating .bar-row span{color:#333}
-.review-cta-rating .bar-row b{color:#666}
+.review-cta-rating .bar-row b{color:#666;font-weight:500}
+.review-cta-rating .bar{background:rgba(0,0,0,.1)}
 .review-cta-rating .bar i{background:linear-gradient(90deg,var(--gold),var(--rust-2))}
+.review-cta-copy{display:flex;flex-direction:column;align-items:flex-start}
 .review-cta-copy .eyebrow{color:var(--rust-2)}
 .review-cta-heading{
   font-family:var(--font-brand);
@@ -2799,24 +2801,10 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;color:inhe
 .review-btn-sm .review-btn-badge{width:34px;height:34px}
 .review-btn-sm .review-btn-label{font-size:11px;padding:0 14px 0 12px}
 
-/* ── QR card ── */
-.review-qr-card{
-  background:#fff;border-radius:20px;
-  padding:24px;text-align:center;
-  box-shadow:0 8px 32px rgba(0,0,0,.1);
-  flex-shrink:0;
-}
-.review-qr-label{
-  font-size:11px;font-weight:700;letter-spacing:.08em;
-  text-transform:uppercase;color:#888;margin-bottom:14px;
-}
-.review-qr-img{display:block;border-radius:8px}
-
 /* Responsive */
 @media(max-width:900px){
   .review-cta-inner{grid-template-columns:1fr;gap:32px}
-  .review-cta-copy{text-align:center}
-  .review-cta-copy .review-btn{margin:0 auto}
+  .review-cta-copy{text-align:center;display:flex;flex-direction:column;align-items:center}
 }
 @media(max-width:768px){
   .review-cta{padding:40px var(--pad)}
