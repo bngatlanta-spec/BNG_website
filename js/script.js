@@ -19,7 +19,7 @@
 const SPECIALS_SHEET_URL = 'https://script.google.com/macros/s/AKfycby0SuBSdRwbCsqC-DrsGHtaz0FEL-U31KnpwwV4paF8gvY6udX-SrgYSvuao8CzlhGMUg/exec';
 
 // ── Google Review link — change this one value to update every button & QR code
-const REVIEW_URL = 'https://g.page/r/PASTE_YOUR_GOOGLE_REVIEW_LINK_HERE/review';
+const REVIEW_URL = 'https://customersreviewforus.com/bikes-barrels-biryani-n-grill/';
 
 // Wire review buttons and QR code to REVIEW_URL
 document.querySelectorAll('.review-link').forEach(el => { el.href = REVIEW_URL; });
