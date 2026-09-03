@@ -209,7 +209,7 @@
       <a href="#reviews" class="nav-link">Reviews</a>
       <a href="#contact" class="nav-link">Contact</a>
     </nav>
-    <a href="https://www.google.com/maps/reserve/v/dine/c/xVUjuFBfeeQ?source=pa&opi=89978449&hl=en-US" target="_blank" rel="noopener" class="nav-cta">
+    <a href="#reservations" class="nav-cta">
       <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M17 12h-5v5h5v-5zM16 1v2H8V1H6v2H5c-1.11 0-1.99.9-1.99 2L3 19c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2h-1V1h-2zm3 18H5V8h14v11z"/></svg>
       Reserve
     </a>
@@ -218,6 +218,7 @@
     </button>
   </div>
 </header>
+<div class="nav-backdrop" id="navBackdrop"></div>
 
 <!-- HERO -->
 <section id="home" class="hero" aria-label="Welcome to Bikes and Barrels Biryani N Grill">
@@ -248,7 +249,7 @@
         <span>Explore Menu</span>
         <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M4 12h16m0 0l-6-6m6 6l-6 6" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round"/></svg>
       </a>
-      <a href="https://www.google.com/maps/reserve/v/dine/c/xVUjuFBfeeQ?source=pa&opi=89978449&hl=en-US" target="_blank" rel="noopener" class="btn btn-ghost">Reserve a Table</a>
+      <a href="#reservations" class="btn btn-ghost">Reserve a Table</a>
     </div>
 
     <div class="hero-stats fade-in-up delay-5">
@@ -648,7 +649,7 @@
       </ul>
 
       <div class="catering-actions">
-        <a href="#contact" class="btn btn-primary">Get a Quote</a>
+        <a href="#cateringForm" class="btn btn-primary">Get a Quote</a>
         <a href="tel:+16782935779" class="btn btn-ghost">Call Us</a>
       </div>
     </div>
@@ -658,6 +659,63 @@
       <div class="cat-tile tile-2" style="background-image:url('images/family-mandi-feast.webp')"></div>
       <div class="cat-tile tile-3" style="background-image:url('images/party-area.webp')"></div>
       <div class="cat-tile tile-4" style="background-image:url('images/clay-pot-signature-biryani.webp')"></div>
+    </div>
+  </div>
+
+  <!-- Catering inquiry form -->
+  <div class="section-wrap cat-form-section">
+    <div class="cat-form-card reveal" id="cateringForm">
+
+      <div class="res-card-header">
+        <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M11 9H9V2H7v7H5V2H3v7c0 2.12 1.66 3.84 3.75 3.97V22h2.5v-9.03C11.34 12.84 13 11.12 13 9V2h-2v7zm5-3v8h2.5v8H21V2c-2.76 0-5 2.24-5 4z"/></svg>
+        <span>Catering Enquiry</span>
+      </div>
+
+      <div id="catFormWrap">
+        <form class="res-form cat-form" id="cateringInquiryForm">
+          <div class="form-row">
+            <div class="res-field">
+              <label for="catName">Your Name</label>
+              <input type="text" id="catName" name="name" placeholder="Full name" required />
+            </div>
+            <div class="res-field">
+              <label for="catEmail">Email Address</label>
+              <input type="email" id="catEmail" name="email" placeholder="you@email.com" required />
+            </div>
+          </div>
+          <div class="res-field">
+            <label for="catSubject">Event Type</label>
+            <input type="text" id="catSubject" name="subject" placeholder="Birthday party, wedding, corporate lunch&hellip;" required />
+          </div>
+          <div class="res-field">
+            <label for="catDetails">Event Details</label>
+            <textarea id="catDetails" name="eventDetails" rows="4" placeholder="Tell us your date, number of guests, venue, menu preferences&hellip;" required></textarea>
+          </div>
+
+          <div class="res-error" id="catError" hidden>
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/></svg>
+            Something went wrong. Please call <a href="tel:+16782935779">(678) 293-5779</a>.
+          </div>
+
+          <button type="submit" class="btn btn-primary res-submit" id="catSubmitBtn">
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/></svg>
+            <span id="catSubmitLabel">Send Enquiry</span>
+          </button>
+        </form>
+      </div>
+
+      <!-- success state -->
+      <div class="res-success" id="catSuccess" hidden>
+        <div class="res-success-ring">
+          <svg viewBox="0 0 24 24" width="36" height="36" fill="currentColor"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/></svg>
+        </div>
+        <p class="res-success-tag">Enquiry Received</p>
+        <h3>Thanks, <span id="catSuccessName"></span>!</h3>
+        <p class="res-success-sub">We&rsquo;ll get back to you with a custom quote shortly.</p>
+        <p class="res-success-note">Questions? <a href="tel:+16782935779">(678) 293-5779</a></p>
+        <button class="btn btn-ghost res-reset-btn" id="catResetBtn">Send another enquiry</button>
+      </div>
+
     </div>
   </div>
 </section>
@@ -680,7 +738,7 @@
           <div class="event-date"><strong>11 PM</strong><span>Late Night</span></div>
           <h3>Midnight Biryani Special</h3>
           <p>Fresh-off-the-dum biryanis served late night &mdash; because cravings don&rsquo;t sleep.</p>
-          <a href="https://www.google.com/maps/reserve/v/dine/c/xVUjuFBfeeQ?source=pa&opi=89978449&hl=en-US" target="_blank" rel="noopener" class="event-link">Reserve &rarr;</a>
+          <a href="#reservations" class="event-link">Reserve &rarr;</a>
         </div>
       </article>
 
@@ -692,7 +750,7 @@
           <div class="event-date"><strong>ANY</strong><span>Occasion</span></div>
           <h3>Birthdays &amp; Private Events</h3>
           <p>Host your birthday, engagement or corporate dinner in our private room.</p>
-          <a href="https://www.google.com/maps/reserve/v/dine/c/xVUjuFBfeeQ?source=pa&opi=89978449&hl=en-US" target="_blank" rel="noopener" class="event-link">Enquire &rarr;</a>
+          <a href="#reservations" class="event-link">Enquire &rarr;</a>
         </div>
       </article>
 
@@ -704,7 +762,7 @@
           <div class="event-date"><strong>NEW</strong><span>Setup</span></div>
           <h3>Custom Event Setup</h3>
           <p>Themed decor, live cooking stations and a bar &mdash; we tailor the room to your vibe.</p>
-          <a href="https://www.google.com/maps/reserve/v/dine/c/xVUjuFBfeeQ?source=pa&opi=89978449&hl=en-US" target="_blank" rel="noopener" class="event-link">Plan Yours &rarr;</a>
+          <a href="#reservations" class="event-link">Plan Yours &rarr;</a>
         </div>
       </article>
     </div>
@@ -791,6 +849,177 @@
       <div class="buffet-item" style="background-image:url('images/buffet-6.webp')"></div>
     </div>
   </div>
+</section>
+
+<!-- RESERVATIONS -->
+<section id="reservations" class="reservations">
+
+  <!-- background image layer -->
+  <div class="res-bg" style="background-image:url('images/dining-area.webp')"></div>
+  <div class="res-bg-overlay"></div>
+
+  <div class="section-wrap res-inner">
+
+    <!-- header -->
+    <div class="section-head reveal center" style="margin-bottom:48px">
+      <span class="eyebrow">BOOK A TABLE</span>
+      <h2 class="section-title">Reserve Your <em>Table.</em></h2>
+      <p class="section-sub" style="margin:0 auto">Plan your visit in advance &mdash; birthday dinner, date night, or a family feast. We&rsquo;ll confirm your table shortly.</p>
+    </div>
+
+    <!-- two-column layout -->
+    <div class="res-columns">
+
+      <!-- left: quick-info panel -->
+      <aside class="res-panel reveal">
+        <div class="res-panel-inner">
+          <h3 class="res-panel-title">Good to Know</h3>
+
+          <ul class="res-highlights">
+            <li>
+              <div class="res-icon">
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17 12h-5v5h5v-5zM16 1v2H8V1H6v2H5c-1.11 0-1.99.9-1.99 2L3 19c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2h-1V1h-2zm3 18H5V8h14v11z"/></svg>
+              </div>
+              <div>
+                <strong>Mon &ndash; Fri</strong>
+                <span>11:00 AM &ndash; 11:00 PM</span>
+              </div>
+            </li>
+            <li>
+              <div class="res-icon">
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17 12h-5v5h5v-5zM16 1v2H8V1H6v2H5c-1.11 0-1.99.9-1.99 2L3 19c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2h-1V1h-2zm3 18H5V8h14v11z"/></svg>
+              </div>
+              <div>
+                <strong>Sat &ndash; Sun</strong>
+                <span>11:30 AM &ndash; 11:00 PM</span>
+              </div>
+            </li>
+            <li>
+              <div class="res-icon">
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20 15.5c-1.2 0-2.5-.2-3.6-.6-.3-.1-.7 0-1 .2l-2.2 2.2c-2.8-1.5-5.2-3.8-6.6-6.6l2.2-2.2c.3-.3.4-.7.2-1-.4-1.1-.6-2.4-.6-3.6 0-.5-.5-.9-1-.9H4c-.5 0-1 .5-1 1 0 9.4 7.6 17 17 17 .5 0 1-.5 1-1v-3.5c0-.5-.5-1-1-1z"/></svg>
+              </div>
+              <div>
+                <strong>Prefer to call?</strong>
+                <a href="tel:+16782935779">(678) 293-5779</a>
+              </div>
+            </li>
+            <li>
+              <div class="res-icon">
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+              </div>
+              <div>
+                <strong>Confirmation</strong>
+                <span>We email you within 1 hour</span>
+              </div>
+            </li>
+          </ul>
+
+          <div class="res-panel-note">
+            For large groups or private events, call us directly or visit the <a href="#catering">Catering</a> section.
+          </div>
+        </div>
+      </aside>
+
+      <!-- right: form card -->
+      <div class="res-card reveal">
+
+        <div class="res-card-header">
+          <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M17 12h-5v5h5v-5zM16 1v2H8V1H6v2H5c-1.11 0-1.99.9-1.99 2L3 19c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2h-1V1h-2zm3 18H5V8h14v11z"/></svg>
+          <span>Table Reservation</span>
+        </div>
+
+        <div id="resFormWrap">
+        <form class="res-form" id="reservationForm">
+          <div class="form-row">
+            <div class="res-field">
+              <label for="resName">Full Name</label>
+              <input type="text" id="resName" name="customerName" placeholder="Your full name" required />
+            </div>
+            <div class="res-field">
+              <label for="resPhone">Phone</label>
+              <input type="tel" id="resPhone" name="phone" placeholder="(469) 555-1234" required />
+            </div>
+          </div>
+          <div class="res-field">
+            <label for="resEmail">Email Address</label>
+            <input type="email" id="resEmail" name="email" placeholder="you@email.com" required />
+          </div>
+          <div class="form-row">
+            <div class="res-field">
+              <label for="resDate">Date</label>
+              <input type="date" id="resDate" name="reservationDate" required />
+            </div>
+            <div class="res-field">
+              <label for="resTime">Time</label>
+              <select id="resTime" name="reservationTime" required>
+                <option value="" disabled selected>Select time</option>
+                <option>11:00 AM</option><option>11:30 AM</option>
+                <option>12:00 PM</option><option>12:30 PM</option>
+                <option>1:00 PM</option><option>1:30 PM</option>
+                <option>2:00 PM</option><option>2:30 PM</option>
+                <option>3:00 PM</option><option>3:30 PM</option>
+                <option>4:00 PM</option><option>4:30 PM</option>
+                <option>5:00 PM</option><option>5:30 PM</option>
+                <option>6:00 PM</option><option>6:30 PM</option>
+                <option>7:00 PM</option><option>7:30 PM</option>
+                <option>8:00 PM</option><option>8:30 PM</option>
+                <option>9:00 PM</option><option>9:30 PM</option>
+                <option>10:00 PM</option><option>10:30 PM</option>
+              </select>
+            </div>
+          </div>
+          <div class="res-field">
+            <label for="resParty">Party Size</label>
+            <select id="resParty" name="partySize" required>
+              <option value="" disabled selected>Number of guests</option>
+              <option value="1">1 guest</option>
+              <option value="2">2 guests</option>
+              <option value="3">3 guests</option>
+              <option value="4">4 guests</option>
+              <option value="5">5 guests</option>
+              <option value="6">6 guests</option>
+              <option value="7">7 guests</option>
+              <option value="8">8 guests</option>
+              <option value="9">9 guests</option>
+              <option value="10">10 guests</option>
+              <option value="11-15">11&ndash;15 guests</option>
+              <option value="16-20">16&ndash;20 guests</option>
+              <option value="20+">20+ guests (contact us)</option>
+            </select>
+          </div>
+          <div class="res-field">
+            <label for="resRequests">Special Requests <span class="res-optional">(optional)</span></label>
+            <textarea id="resRequests" name="specialRequests" rows="3" placeholder="Birthday dinner, dietary needs, seating preference&hellip;"></textarea>
+          </div>
+
+          <div class="res-error" id="resError" hidden>
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/></svg>
+            Something went wrong. Please call us at <a href="tel:+16782935779">(678) 293-5779</a>.
+          </div>
+
+          <button type="submit" class="btn btn-primary res-submit" id="resSubmitBtn">
+            <svg viewBox="0 0 24 24" width="17" height="17" fill="currentColor"><path d="M17 12h-5v5h5v-5zM16 1v2H8V1H6v2H5c-1.11 0-1.99.9-1.99 2L3 19c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2h-1V1h-2zm3 18H5V8h14v11z"/></svg>
+            <span id="resSubmitLabel">Confirm Reservation</span>
+          </button>
+        </form>
+
+        </div><!-- /resFormWrap -->
+
+        <!-- success state — replaces the form -->
+        <div class="res-success" id="resSuccess" hidden>
+          <div class="res-success-ring">
+            <svg viewBox="0 0 24 24" width="36" height="36" fill="currentColor"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/></svg>
+          </div>
+          <p class="res-success-tag">Reservation Received</p>
+          <h3>See you soon,<br/><span id="resSuccessName"></span>!</h3>
+          <p class="res-success-sub" id="resSuccessDetail"></p>
+          <p class="res-success-note">We&rsquo;ll confirm your table within the hour.<br/>Questions? <a href="tel:+16782935779">(678) 293-5779</a></p>
+          <button class="btn btn-ghost res-reset-btn" id="resResetBtn">Book another table</button>
+        </div>
+
+      </div><!-- /res-card -->
+    </div><!-- /res-columns -->
+  </div><!-- /section-wrap -->
 </section>
 
 <!-- GALLERY -->
@@ -1001,15 +1230,18 @@
         </li>
       </ul>
 
-      <form class="contact-form" onsubmit="event.preventDefault(); alert('Thanks! We will get back to you shortly.'); this.reset();">
+      <form class="contact-form" id="contactForm">
         <div class="form-row">
-          <input type="text" placeholder="Your Name" required />
-          <input type="email" placeholder="Email Address" required />
+          <input type="text" id="contactName" placeholder="Your Name" required />
+          <input type="email" id="contactEmail" placeholder="Email Address" required />
         </div>
-        <input type="text" placeholder="Subject (Catering / Reservation / Event)" required />
-        <textarea rows="4" placeholder="Tell us about your event..." required></textarea>
-        <button type="submit" class="btn btn-primary">Send Message</button>
+        <input type="text" id="contactSubject" placeholder="Subject (Catering / Reservation / Event)" required />
+        <textarea id="contactMessage" rows="4" placeholder="Tell us about your event..." required></textarea>
+        <button type="submit" class="btn btn-primary" id="contactSubmitBtn">
+          <span id="contactSubmitLabel">Send Message</span>
+        </button>
       </form>
+      <p class="contact-form-status" id="contactStatus" hidden></p>
     </div>
 
     <div class="contact-map reveal">
@@ -1042,7 +1274,7 @@
       <h5>Contact</h5>
       <a href="tel:+16782935779">(678) 293-5779</a>
       <a href="https://food.orders.co/bikesbarrels-biryaningrill/menu" target="_blank" rel="noopener">Order Online</a>
-      <a href="https://www.google.com/maps/reserve/v/dine/c/xVUjuFBfeeQ?source=pa&opi=89978449&hl=en-US" target="_blank" rel="noopener">Reservations</a>
+      <a href="#reservations">Reservations</a>
     </div>
     <div class="footer-social">
       <h5>Follow</h5>

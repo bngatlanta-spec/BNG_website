@@ -212,15 +212,25 @@ window.addEventListener('scroll', () => {
 /* ---------- Mobile menu ---------- */
 const hamburger = document.getElementById('hamburger');
 const navLinks = document.getElementById('navLinks');
+const navBackdrop = document.getElementById('navBackdrop');
+
+function closeNav() {
+  hamburger.classList.remove('open');
+  navLinks.classList.remove('open');
+  navBackdrop.classList.remove('open');
+}
+
 hamburger.addEventListener('click', () => {
+  const opening = !navLinks.classList.contains('open');
   hamburger.classList.toggle('open');
   navLinks.classList.toggle('open');
+  navBackdrop.classList.toggle('open', opening);
 });
+
+navBackdrop.addEventListener('click', closeNav);
+
 document.querySelectorAll('.nav-link').forEach(a => {
-  a.addEventListener('click', () => {
-    hamburger.classList.remove('open');
-    navLinks.classList.remove('open');
-  });
+  a.addEventListener('click', closeNav);
 });
 
 /* ---------- Active nav on scroll ---------- */
@@ -389,3 +399,188 @@ if (barsSection) {
   }, { threshold: 0.4 });
   barObs.observe(barsSection);
 }
+
+/* ---------- Reservation form ---------- */
+
+// Paste your deployed Apps Script URL here (see reservation-apps-script.js for setup steps)
+const RESERVATION_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycby0SuBSdRwbCsqC-DrsGHtaz0FEL-U31KnpwwV4paF8gvY6udX-SrgYSvuao8CzlhGMUg/exec';
+
+// Set minimum date to today
+const resDateInput = document.getElementById('resDate');
+if (resDateInput) {
+  resDateInput.setAttribute('min', new Date().toISOString().split('T')[0]);
+}
+
+const reservationForm = document.getElementById('reservationForm');
+if (reservationForm) {
+  reservationForm.addEventListener('submit', async function (e) {
+    e.preventDefault();
+
+    const name     = document.getElementById('resName').value.trim();
+    const phone    = document.getElementById('resPhone').value.trim();
+    const email    = document.getElementById('resEmail').value.trim();
+    const date     = document.getElementById('resDate').value;
+    const time     = document.getElementById('resTime').value;
+    const party    = document.getElementById('resParty').value;
+    const requests = document.getElementById('resRequests').value.trim();
+
+    const btn      = document.getElementById('resSubmitBtn');
+    const label    = document.getElementById('resSubmitLabel');
+    const errEl    = document.getElementById('resError');
+
+    // Loading state
+    btn.disabled   = true;
+    label.textContent = 'Sending…';
+    errEl.hidden   = true;
+
+    const formattedDate = date
+      ? new Date(date + 'T12:00:00').toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric' })
+      : date;
+
+    const partySuffix = (party === '1') ? '1 guest' : `${party} guests`;
+
+    try {
+      // POST to Apps Script — doPost handles both reservation and catering by type
+      fetch(RESERVATION_SCRIPT_URL, {
+        method: 'POST',
+        mode:   'no-cors',
+        body:   JSON.stringify({ type: 'reservation', customerName: name, phone, email,
+                                 reservationDate: date, reservationTime: time,
+                                 partySize: party, specialRequests: requests })
+      });
+      // Can't read a no-cors response — add a small delay so the request fires
+      await new Promise(r => setTimeout(r, 600));
+
+      // Fade form out, then swap to confirmation and scroll into view
+      document.getElementById('resSuccessName').textContent   = name;
+      document.getElementById('resSuccessDetail').textContent = `${formattedDate} · ${time} · ${partySuffix}`;
+
+      const formWrap  = document.getElementById('resFormWrap');
+      const successEl = document.getElementById('resSuccess');
+
+      formWrap.classList.add('fading');
+      setTimeout(() => {
+        formWrap.hidden   = true;
+        successEl.hidden  = false;
+        successEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }, 260);
+
+    } catch {
+      // still show success — request was fired, script processes async
+    } finally {
+      btn.disabled      = false;
+      label.textContent = 'Confirm Reservation';
+    }
+  });
+}
+
+document.getElementById('resResetBtn')?.addEventListener('click', function () {
+  const form     = document.getElementById('reservationForm');
+  const formWrap = document.getElementById('resFormWrap');
+  form.reset();
+  document.getElementById('resSuccess').hidden = true;
+  document.getElementById('resError').hidden   = true;
+  formWrap.classList.remove('fading');
+  formWrap.hidden = false;
+  formWrap.scrollIntoView({ behavior: 'smooth', block: 'start' });
+});
+
+/* ---------- Catering enquiry form ---------- */
+const cateringForm = document.getElementById('cateringInquiryForm');
+if (cateringForm) {
+  cateringForm.addEventListener('submit', async function (e) {
+    e.preventDefault();
+
+    const name        = document.getElementById('catName').value.trim();
+    const email       = document.getElementById('catEmail').value.trim();
+    const subject     = document.getElementById('catSubject').value.trim();
+    const eventDetails = document.getElementById('catDetails').value.trim();
+
+    const btn   = document.getElementById('catSubmitBtn');
+    const label = document.getElementById('catSubmitLabel');
+    const errEl = document.getElementById('catError');
+
+    btn.disabled      = true;
+    label.textContent = 'Sending…';
+    errEl.hidden      = true;
+
+    try {
+      fetch(RESERVATION_SCRIPT_URL, {
+        method: 'POST',
+        mode:   'no-cors',
+        body:   JSON.stringify({ type: 'catering', name, email, subject, eventDetails })
+      });
+      await new Promise(r => setTimeout(r, 600));
+
+      document.getElementById('catSuccessName').textContent = name;
+
+      const wrap      = document.getElementById('catFormWrap');
+      const successEl = document.getElementById('catSuccess');
+      wrap.classList.add('fading');
+      setTimeout(() => {
+        wrap.hidden      = true;
+        successEl.hidden = false;
+        successEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }, 260);
+
+    } catch {
+      // still show success — request was fired
+    } finally {
+      btn.disabled      = false;
+      label.textContent = 'Send Enquiry';
+    }
+  });
+}
+
+/* ---------- Contact form (Send Message) ---------- */
+const contactForm = document.getElementById('contactForm');
+if (contactForm) {
+  contactForm.addEventListener('submit', async function (e) {
+    e.preventDefault();
+
+    const name    = document.getElementById('contactName').value.trim();
+    const email   = document.getElementById('contactEmail').value.trim();
+    const subject = document.getElementById('contactSubject').value.trim();
+    const message = document.getElementById('contactMessage').value.trim();
+
+    const btn    = document.getElementById('contactSubmitBtn');
+    const label  = document.getElementById('contactSubmitLabel');
+    const status = document.getElementById('contactStatus');
+
+    btn.disabled      = true;
+    label.textContent = 'Sending…';
+    status.hidden     = true;
+
+    try {
+      fetch(RESERVATION_SCRIPT_URL, {
+        method: 'POST',
+        mode:   'no-cors',
+        body:   JSON.stringify({ type: 'contact', name, email, subject, message })
+      });
+      await new Promise(r => setTimeout(r, 600));
+
+      contactForm.reset();
+      status.textContent = '✓ Message sent! We\'ll get back to you shortly.';
+      status.className   = 'contact-form-status ok';
+      status.hidden      = false;
+    } catch {
+      status.textContent = 'Something went wrong. Please call (678) 293-5779.';
+      status.className   = 'contact-form-status err';
+      status.hidden      = false;
+    } finally {
+      btn.disabled      = false;
+      label.textContent = 'Send Message';
+    }
+  });
+}
+
+document.getElementById('catResetBtn')?.addEventListener('click', function () {
+  const form = document.getElementById('cateringInquiryForm');
+  const wrap = document.getElementById('catFormWrap');
+  form.reset();
+  document.getElementById('catSuccess').hidden = true;
+  document.getElementById('catError').hidden   = true;
+  wrap.classList.remove('fading');
+  wrap.hidden = false;
+  wrap.scrollIntoView({ behavior: 'smooth', block: 'start' });
+});
