@@ -4,6 +4,8 @@
 User-agent: *
 Allow: /
 Disallow: /new_images/
+Disallow: /backend/
+Disallow: /clover-api-sdk/
 Disallow: /*.json$
 
 # Search engines

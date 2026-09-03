@@ -365,6 +365,7 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;color:inhe
 /* ---- Section base ---- */
 .section{padding:70px var(--pad);position:relative;overflow:hidden}
 .section-wrap{max-width:1360px;margin:0 auto}
+.section-wrap.center{text-align:center}
 .eyebrow{
   display:inline-block;
   font-size:11px;letter-spacing:4px;
@@ -1899,9 +1900,9 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;color:inhe
     color:#1a0e08;
   }
 
-  /* Mobile nav backdrop */
+  /* Mobile nav backdrop — z-index 99 keeps nav panel (inside navbar z-index:100) visible above it */
   .nav-backdrop{
-    position:fixed;inset:0;z-index:100;
+    position:fixed;inset:0;z-index:99;
     background:rgba(0,0,0,.55);
     opacity:0;pointer-events:none;
     transition:opacity .35s var(--ease);
@@ -1986,6 +1987,7 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;color:inhe
   .about-features{grid-template-columns:1fr 1fr}
   .catering-visual{grid-template-columns:1fr 1fr;height:340px}
   .tile-1,.tile-4{grid-row:auto}
+  .catering-actions{justify-content:center}
   .buffet-strip{margin-top:60px;padding-top:44px}
   .buffet-item{flex:0 0 180px;height:130px}
   .buffet-strip-head h3{font-size:22px}
@@ -2065,6 +2067,7 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;color:inhe
 
   /* Catering visual */
   .catering-visual{height:280px;gap:10px}
+  .catering-wrap + .section-wrap{margin-top:28px !important}
 
   /* Ambience/gallery even tighter */
   .ambience-grid,.gallery-grid{grid-template-columns:1fr;grid-auto-rows:200px;gap:10px}
@@ -2666,6 +2669,10 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;color:inhe
 
 /* Ensure hidden attribute wins over display:flex on success panels */
 #resSuccess[hidden],#catSuccess[hidden]{display:none}
+
+/* ── Contact section: catering form spacing from info list ── */
+.contact-copy #catFormWrap{margin-top:28px}
+.contact-copy .res-success{background:var(--bg-card);border:1px solid rgba(232,163,61,.18);border-radius:var(--radius);margin-top:28px}
 
 /* ── Catering form section spacing ── */
 .cat-form-section{margin-top:56px}
