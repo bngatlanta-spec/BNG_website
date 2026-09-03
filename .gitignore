@@ -1,0 +1,7 @@
+node_modules/
+.idea/
+.claude/
+Handy/
+--full-page
+*.DS_Store
+Thumbs.db
