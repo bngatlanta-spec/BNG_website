@@ -171,6 +171,21 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;color:inhe
 }
 .nav-cta:hover{transform:translateY(-2px);box-shadow:0 12px 28px -8px rgba(232,163,61,.8)}
 
+.nav-review{
+  display:inline-flex;align-items:center;gap:6px;
+  padding:9px 18px;
+  border:1.5px solid var(--rust-2);
+  color:var(--rust-2);
+  font-weight:600;font-size:13px;letter-spacing:.5px;
+  border-radius:999px;
+  transition:all .3s var(--ease);
+  white-space:nowrap;
+}
+.nav-review:hover{background:var(--rust-2);color:#fff}
+
+/* Mobile-only action buttons inside slide-out nav */
+.nav-mobile-btns{display:none}
+
 .hamburger{display:none;flex-direction:column;gap:5px;padding:8px}
 .hamburger span{width:26px;height:2px;background:var(--cream);border-radius:2px;transition:.3s}
 .hamburger.open span:nth-child(1){transform:translateY(7px) rotate(45deg)}
@@ -1863,6 +1878,26 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;color:inhe
   .nav-link{font-size:17px;padding:10px 20px}
   .hamburger{display:flex;z-index:110}
   .nav-cta,.nav-review{display:none}
+
+  .nav-mobile-btns{
+    display:flex;flex-direction:column;gap:12px;
+    width:100%;margin-top:24px;padding-top:24px;
+    border-top:1px solid var(--line);
+  }
+  .nav-mobile-review,.nav-mobile-reserve{
+    display:flex;align-items:center;justify-content:center;
+    gap:8px;padding:13px 20px;border-radius:999px;
+    font-size:14px;font-weight:600;letter-spacing:.5px;
+    text-align:center;text-decoration:none;
+  }
+  .nav-mobile-review{
+    border:1.5px solid var(--rust-2);color:var(--rust-2);
+  }
+  .nav-mobile-review:hover{background:var(--rust-2);color:#fff}
+  .nav-mobile-reserve{
+    background:linear-gradient(135deg,var(--gold),var(--rust-2));
+    color:#1a0e08;
+  }
 
   /* Mobile nav backdrop */
   .nav-backdrop{
