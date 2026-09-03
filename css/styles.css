@@ -2015,8 +2015,6 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;color:inhe
   .g-item::after{opacity:.75}
 
   /* Reviews */
-  .reviews-summary{grid-template-columns:1fr;gap:24px;padding:28px}
-  .rating-block{padding-right:0;padding-bottom:24px;border-right:none;border-bottom:1px solid var(--line)}
   .rating-num{font-size:56px}
   .reviews-carousel{padding:0}
   .rev-nav{display:none}
@@ -2836,17 +2834,24 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;color:inhe
 .review-btn-sm .review-btn-badge{width:34px;height:34px}
 .review-btn-sm .review-btn-label{font-size:11px;padding:0 14px 0 12px}
 
+/* Footer review button spacing */
+.footer-social .review-btn-sm{margin-top:18px}
+
 /* Responsive */
 @media(max-width:900px){
-  .review-cta-inner{grid-template-columns:1fr;gap:32px}
+  .review-cta-inner{grid-template-columns:1fr;gap:28px}
   .review-cta-copy{text-align:center;display:flex;flex-direction:column;align-items:center}
+  .review-cta-heading{text-align:center}
+  .review-cta-sub{text-align:center}
 }
 @media(max-width:768px){
   .review-cta{padding:40px var(--pad)}
   .review-cta-blob-1{width:200px;height:200px;top:-60px;right:-40px}
   .review-cta-blob-2{width:140px;height:140px;bottom:-40px;left:-30px}
-  .review-cta-rating{padding:24px 20px}
+  .review-cta-rating{padding:20px 16px}
 }
 @media(max-width:480px){
-  .review-cta{padding:32px var(--pad)}
+  .review-cta{padding:28px var(--pad)}
+  .review-cta-heading{font-size:22px}
+  .review-cta-rating .rating-num{font-size:44px}
 }

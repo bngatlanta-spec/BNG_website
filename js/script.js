@@ -235,7 +235,7 @@ hamburger.addEventListener('click', () => {
 
 navBackdrop.addEventListener('click', closeNav);
 
-document.querySelectorAll('.nav-link').forEach(a => {
+document.querySelectorAll('.nav-link, .nav-mobile-reserve, .nav-mobile-review').forEach(a => {
   a.addEventListener('click', closeNav);
 });
 
