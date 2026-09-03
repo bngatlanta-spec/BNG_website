@@ -247,7 +247,7 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;color:inhe
 .hero-title .line{display:block}
 .hero-title em{font-style:italic;color:var(--gold);font-weight:500}
 .hero-title .accent{
-  background:linear-gradient(135deg,var(--gold),var(--rust-2));
+  background:linear-gradient(135deg,var(--gold-2) 0%,var(--gold) 35%,var(--rust-2) 70%,var(--rust) 100%);
   -webkit-background-clip:text;background-clip:text;color:transparent;
   font-style:italic;font-weight:900;
 }
