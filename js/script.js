@@ -129,13 +129,15 @@ function renderNotification(items, isDemo, today) {
   const preview = document.getElementById('notifPreviewBadge');
   if (!bell || !card || !list) return;
 
+  const ORDER_URL = 'https://food.orders.co/bikesbarrels-biryaningrill/menu';
   list.innerHTML = items.map((s, i) => `
-    <li class="notif-item" style="animation-delay:${i * 0.08}s">
+    <li class="notif-item" style="animation-delay:${i * 0.08}s;cursor:pointer" onclick="window.open('${ORDER_URL}','_blank','noopener')">
       <span class="notif-item-num">${String(i + 1).padStart(2, '0')}</span>
       <div class="notif-item-body">
         <span class="notif-item-cat">${s.category}</span>
         <span class="notif-item-name">${s.item}</span>
       </div>
+      <span class="notif-item-arrow">&#8594;</span>
     </li>
   `).join('');
 
@@ -255,108 +257,7 @@ const observer = new IntersectionObserver((entries) => {
 }, { threshold: 0.12, rootMargin: '0px 0px -60px 0px' });
 document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 
-/* ---------- Menu data ---------- */
-const menuData = {
-  popular: [
-    { name:'Chicken Tikka Masala', desc:'Tandoor-roasted chicken in a silky tomato-butter gravy, kissed with fenugreek.', price:'$16', tag:'POPULAR', img:'images/chicken-tikka-masala.jpg' },
-    { name:'Chicken Dum Biryani', desc:'Long-grain basmati layered with marinated chicken, slow-cooked on dum for aromatic perfection.', price:'$17', tag:'SIGNATURE', img:'images/chicken-dum-biryani-pot.webp' },
-    { name:'Paneer Biryani', desc:'Cottage cheese cubes layered with saffron rice, cashews and warming whole spices.', price:'$15', tag:'VEG', img:'images/paneer-biryani.png' },
-    { name:'Gongura Lamb Curry', desc:'Tender lamb slow-simmered with tangy Andhra sorrel leaves and green chilies.', price:'$22', tag:'BOLD', img:'images/gongura-lamb-curry.jpg' },
-    { name:'Bullet Naan Chilli Garlic', desc:'Fluffy naan blistered in the tandoor with fiery green chili and roasted garlic.', price:'$6', tag:'FIERY', img:'images/bullet-naan-chilli-garlic.png' },
-    { name:'B&B Clay Pot Biryani', desc:'Our signature clay pot biryani &mdash; branded with the B&amp;B seal.', price:'$20', tag:'CHEF', img:'images/clay-pot-signature-biryani.webp' },
-    { name:'Butter Chicken Masala', desc:'Tender chicken in a creamy tomato-cashew makhani gravy.', price:'$17', tag:'POPULAR', img:'images/butter-chicken-masala.jpg' },
-    { name:'Apollo Fish', desc:'Crispy fried fish tossed in a South Indian tangy chili glaze &mdash; coastal favorite.', price:'$16', tag:'COASTAL', img:'images/apollo-fish.jpg' },
-    { name:'Tandoori Half Chicken', desc:'Half chicken marinated in yogurt and spices, chargrilled in the tandoor.', price:'$18', tag:'SMOKY', img:'images/tandoori-half-chicken.webp' },
-    { name:'Lamb Chops', desc:'Slow-braised lamb chops in a rich onion-tomato masala with garam masala warmth.', price:'$24', tag:'PREMIUM', img:'images/lamb-chops.jpg' }
-  ],
-  biryani: [
-    { name:'Chicken Dum Biryani', desc:'Long-grain basmati layered with marinated chicken, slow-cooked on dum.', price:'$17', tag:'SIGNATURE', img:'images/chicken-dum-biryani-pot.webp' },
-    { name:'Goat Dum Biryani', desc:'Tender goat meat layered with saffron rice, slow-cooked to perfection.', price:'$22', tag:'CLASSIC', img:'images/goat-dum-biryani.jpg' },
-    { name:'Paneer Biryani', desc:'Cottage cheese with saffron rice, cashews and whole spices.', price:'$15', tag:'VEG', img:'images/paneer-biryani.png' },
-    { name:'Egg Biryani', desc:'Hyderabadi-style egg biryani with soft boiled eggs and fragrant rice.', price:'$14', tag:'HOMESTYLE', img:'images/egg-biryani.jpg' },
-    { name:'B&B Clay Pot Biryani', desc:'Our signature clay pot biryani &mdash; sealed and slow-cooked with house-ground spices.', price:'$20', tag:'HOUSE SPECIAL', img:'images/clay-pot-signature-biryani.webp' },
-    { name:'MLA Potlam Bucket Biryani', desc:'Slow-cooked bucket biryani wrapped and steamed &mdash; feeds 2-3 people.', price:'$32', tag:'FAMILY', img:'images/mla-potlam-bucket-biryani.png' },
-    { name:'Mutton Mandi', desc:'Slow-cooked mutton served over aromatic rice with pickled onions.', price:'$24', tag:'ARABIAN', img:'images/mutton-mandi.webp' },
-    { name:'Family Mandi Feast', desc:'A grand mandi platter &mdash; perfect for a family gathering or celebration.', price:'$45', tag:'FEAST', img:'images/family-mandi-feast.webp' },
-    { name:'Raju Gari Kodi Pulav', desc:'Country chicken cooked with rice in an aromatic village-style pulav.', price:'$18', tag:'RUSTIC', img:'images/raju-gari-kodi-pulav.webp' }
-  ],
-  curry: [
-    { name:'Chicken Tikka Masala', desc:'Tandoor-roasted chicken in silky tomato-butter gravy.', price:'$16', tag:'POPULAR', img:'images/chicken-tikka-masala.jpg' },
-    { name:'Butter Chicken Masala', desc:'Tender chicken in a creamy tomato-cashew makhani gravy.', price:'$17', tag:'CREAMY', img:'images/butter-chicken-masala.jpg' },
-    { name:'Butter Paneer Masala', desc:'Cottage cheese cubes in a rich tomato-cashew butter gravy.', price:'$15', tag:'CLASSIC', img:'images/butter-paneer.webp' },
-    { name:'Gongura Lamb Curry', desc:'Andhra-style lamb curry with tangy sorrel leaves.', price:'$22', tag:'BOLD', img:'images/gongura-lamb-curry.jpg' },
-    { name:'Nalli Gosht', desc:'Slow-cooked lamb shank in an aromatic pulav &mdash; a Hyderabadi classic.', price:'$26', tag:'PREMIUM', img:'images/nalli-gosht.webp' },
-    { name:'Chilly Paneer', desc:'Indo-Chinese cottage cheese in a spicy garlic soy glaze.', price:'$14', tag:'VEG', img:'images/chilly-paneer.jpg' },
-    { name:'Ghee Roast Chicken', desc:'Chicken dry-tossed with ghee, curry leaves and roasted spices.', price:'$17', tag:'GHEE ROAST', img:'images/ghee-roast-chicken.webp' },
-    { name:'Ghee Roast Mutton Fry', desc:'Tender mutton pieces dry-fried in ghee with black pepper and curry leaves.', price:'$21', tag:'HOUSE FAV', img:'images/ghee-roast-mutton-fry.jpg' }
-  ],
-  starters: [
-    { name:'Chicken 65', desc:'Boneless chicken tossed in a fiery Andhra red spice glaze.', price:'$12', tag:'CROWD FAV', img:'images/chicken-65-plate.jpg' },
-    { name:'Chicken Lollipop', desc:'Crispy fried chicken lollipops in a fiery Indo-Chinese glaze.', price:'$12', tag:'CROWD FAV', img:'images/chicken-lollipop.jpg' },
-    { name:'Chicken Tikka Kebab', desc:'Marinated chicken chunks charred to perfection in the tandoor.', price:'$14', tag:'SMOKY', img:'images/chicken-tikka-kebab-official.jpg' },
-    { name:'Chicken Sheekh Kebab', desc:'Ground chicken skewers spiced with garam masala, grilled in the tandoor.', price:'$14', tag:'GRILLED', img:'images/chicken-sheekh-kebab.jpg' },
-    { name:'Paneer Tikka Kebab', desc:'Paneer cubes and bell peppers marinated in yogurt spices, tandoor-grilled.', price:'$13', tag:'VEG', img:'images/paneer-tikka-kebab.jpg' },
-    { name:'Punjabi Samosa', desc:'Crispy triangular pastries stuffed with spiced potatoes and onions.', price:'$7', tag:'CLASSIC', img:'images/punjabi-samosa.jpg' },
-    { name:'Apollo Fish', desc:'Crispy fried fish in a tangy chili glaze.', price:'$16', tag:'COASTAL', img:'images/apollo-fish.jpg' },
-    { name:'BNG Tandoori Wings', desc:'Chicken wings glazed with our house tandoori sauce, chargrilled to a caramel finish.', price:'$13', tag:'STICKY', img:'images/bng-tandoori-grilled-wings.jpg' },
-    { name:'Manchow Soup', desc:'Spicy Indo-Chinese soup with crispy noodle topping.', price:'$8', tag:'WARM', img:'images/manchow-soup.webp' },
-    { name:'Sweet Corn Soup', desc:'Silky sweet corn soup with delicate herbs.', price:'$7', tag:'MILD', img:'images/sweet-corn-soup.webp' }
-  ],
-  south: [
-    { name:'Crispy Masala Dosa', desc:'Golden rice-lentil crepe folded around spiced potato masala, served with sambar and chutneys.', price:'$12', tag:'CROWD FAV', img:'images/dosa.webp' },
-    { name:'Idly with Chutney', desc:'Fluffy steamed rice cakes with coconut chutney, tomato chutney and hot sambar.', price:'$8', tag:'CLASSIC', img:'images/idly.webp' },
-    { name:'Idly Platter', desc:'A big platter of soft idlys with three chutneys and sambar &mdash; the perfect share.', price:'$12', tag:'SHARE', img:'images/idly-2.webp' },
-    { name:'Street Chaat', desc:'Crispy puris, tangy tamarind, mint chutney and yogurt &mdash; a hit of Indian street food.', price:'$9', tag:'STREET STYLE', img:'images/chaat.webp' },
-    { name:'Chicken Fried Rice', desc:'Wok-tossed rice with chicken, spring onions and Indo-Chinese soy glaze.', price:'$13', tag:'INDO CHINESE', img:'images/chicken-fried-rice.webp' },
-    { name:'Egg Bhurji Special', desc:'Spiced scrambled eggs cooked Hyderabadi-style with fresh cilantro and green chilies.', price:'$10', tag:'BREAKFAST', img:'images/egg-dish.webp' }
-  ],
-  breads: [
-    { name:'Butter Naan', desc:'Soft, pillowy naan brushed with butter, straight from the tandoor.', price:'$4', tag:'CLASSIC', img:'images/butter-naan.webp' },
-    { name:'Bullet Naan Chilli Garlic', desc:'Fluffy naan blistered with fiery green chili and roasted garlic.', price:'$6', tag:'FIERY', img:'images/bullet-naan-chilli-garlic.png' },
-    { name:'Rumali Roti', desc:'Handkerchief-thin bread cooked on an inverted tawa.', price:'$4', tag:'THIN', img:'images/rumali-roti.jpg' },
-    { name:'Mango Lassi (Big)', desc:'Creamy yogurt drink blended with sweet Alphonso mango pulp.', price:'$6', tag:'REFRESHING', img:'images/mango-lassi.jpg' },
-    { name:'Rose Panna Cotta', desc:'House-made rose panna cotta with basil seeds and fresh strawberry.', price:'$8', tag:'HOUSE MADE', img:'images/panna-cotta-dessert.webp' },
-    { name:'Kulfi', desc:'Traditional Indian ice cream slow-churned with cardamom and pistachios.', price:'$6', tag:'ICE COLD', img:'images/kulfi.webp' },
-    { name:'House Dessert', desc:'Ask about our seasonal special &mdash; something sweet is always in rotation.', price:'$7', tag:'SEASONAL', img:'images/dessert-2.webp' },
-    { name:'Masala Chai', desc:'Traditional spiced Indian tea brewed with cardamom, ginger and cloves.', price:'$3', tag:'WARM', img:'images/masala-chai.webp' }
-  ]
-};
-
-/* ---------- Render menu ---------- */
-const menuGrid = document.getElementById('menuGrid');
-function renderMenu(category) {
-  const items = menuData[category] || [];
-  menuGrid.innerHTML = '';
-  items.forEach((item, i) => {
-    const card = document.createElement('article');
-    card.className = 'menu-card';
-    card.style.animationDelay = `${i * 0.08}s`;
-    card.innerHTML = `
-      <div class="menu-card-img">
-        <img src="${item.img}" alt="${item.name}" loading="lazy" />
-        <span class="menu-card-tag">${item.tag}</span>
-      </div>
-      <div class="menu-card-body">
-        <h3>${item.name}</h3>
-        <p>${item.desc}</p>
-        <div class="menu-card-foot">
-          <div class="menu-card-price">${item.price}</div>
-          <button class="menu-card-add">ADD +</button>
-        </div>
-      </div>
-    `;
-    menuGrid.appendChild(card);
-  });
-}
-renderMenu('popular');
-
-document.querySelectorAll('.tab').forEach(tab => {
-  tab.addEventListener('click', () => {
-    document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
-    tab.classList.add('active');
-    renderMenu(tab.dataset.cat);
-  });
-});
+/* ---------- Menu rendering handled by js/menu-static.js ---------- */
 
 /* ---------- Gallery filter + mobile limit ---------- */
 const GALLERY_MOBILE_LIMIT = 6;
