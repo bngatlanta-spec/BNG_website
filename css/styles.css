@@ -246,13 +246,9 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;color:inhe
 }
 .hero-title .line{display:block}
 .hero-title em{font-style:italic;color:var(--gold);font-weight:500}
-.hero-title .accent{
-  display:inline-block;
-  background:linear-gradient(135deg,var(--gold-2) 0%,var(--gold) 40%,var(--rust-2) 75%,var(--rust) 100%);
-  -webkit-background-clip:text;background-clip:text;
-  -webkit-text-fill-color:transparent;color:transparent;
-  font-style:italic;font-weight:900;
-}
+.hero-title .accent{font-style:italic;font-weight:900}
+.accent-gold{color:var(--gold-2)}
+.accent-red{color:var(--rust)}
 .hero-tagline{
   font-size:clamp(14px,1.4vw,17px);
   color:var(--cream-soft);
