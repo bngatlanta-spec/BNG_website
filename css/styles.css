@@ -2834,9 +2834,6 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;color:inhe
 .review-btn-sm .review-btn-badge{width:34px;height:34px}
 .review-btn-sm .review-btn-label{font-size:11px;padding:0 14px 0 12px}
 
-/* Footer review button spacing */
-.footer-social .review-btn-sm{margin-top:18px}
-
 /* Responsive */
 @media(max-width:900px){
   .review-cta-inner{grid-template-columns:1fr;gap:28px}
