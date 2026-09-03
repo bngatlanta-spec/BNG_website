@@ -1,0 +1,42 @@
+{
+  "groups": [
+    {
+      "name": "clover",
+      "type": "com.clover.sdk.autoconfigure.CloverProperties",
+      "sourceType": "com.clover.sdk.autoconfigure.CloverProperties"
+    }
+  ],
+  "properties": [
+    {
+      "name": "clover.app-id",
+      "type": "java.lang.String",
+      "description": "Clover developer app ID — required for the Menus API.",
+      "sourceType": "com.clover.sdk.autoconfigure.CloverProperties"
+    },
+    {
+      "name": "clover.environment",
+      "type": "java.lang.String",
+      "description": "Target environment. Accepts {@code SANDBOX} or {@code PRODUCTION}. Defaults to {@code SANDBOX}.",
+      "sourceType": "com.clover.sdk.autoconfigure.CloverProperties"
+    },
+    {
+      "name": "clover.merchant-id",
+      "type": "java.lang.String",
+      "description": "Clover merchant ID (required).",
+      "sourceType": "com.clover.sdk.autoconfigure.CloverProperties"
+    },
+    {
+      "name": "clover.pakms-key",
+      "type": "java.lang.String",
+      "description": "Clover PAKMS public key — required for Clover.js online payments.",
+      "sourceType": "com.clover.sdk.autoconfigure.CloverProperties"
+    },
+    {
+      "name": "clover.token",
+      "type": "java.lang.String",
+      "description": "Clover API token (required).",
+      "sourceType": "com.clover.sdk.autoconfigure.CloverProperties"
+    }
+  ],
+  "hints": []
+}

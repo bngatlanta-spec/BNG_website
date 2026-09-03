@@ -1,0 +1,4 @@
+com\bng\ordering\OrderControllerTest.class
+com\bng\ordering\PaymentControllerTest.class
+com\bng\ordering\HealthControllerTest.class
+com\bng\ordering\MenuControllerTest.class
