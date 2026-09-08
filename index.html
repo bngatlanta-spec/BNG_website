@@ -1004,16 +1004,16 @@
         <form class="res-form" id="reservationForm">
           <div class="form-row">
             <div class="res-field">
-              <label for="resName">Full Name</label>
+              <label for="resName">Full Name <span class="res-required">*</span></label>
               <input type="text" id="resName" name="customerName" placeholder="Your full name" required />
             </div>
             <div class="res-field">
-              <label for="resPhone">Phone</label>
-              <input type="tel" id="resPhone" name="phone" placeholder="(469) 555-1234" required />
+              <label for="resPhone">Phone <span class="res-required">*</span></label>
+              <input type="tel" id="resPhone" name="phone" placeholder="(469) 555-1234" required inputmode="numeric" pattern="[0-9\s\(\)\-\+]+" />
             </div>
           </div>
           <div class="res-field">
-            <label for="resEmail">Email Address</label>
+            <label for="resEmail">Email Address <span class="res-required">*</span></label>
             <input type="email" id="resEmail" name="email" placeholder="you@email.com" required />
           </div>
           <div class="form-row">

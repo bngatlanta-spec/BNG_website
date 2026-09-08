@@ -2608,6 +2608,7 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;color:inhe
   text-transform:uppercase;color:var(--cream-soft);
 }
 .res-optional{font-weight:400;color:var(--muted);text-transform:none;letter-spacing:0}
+.res-required{color:var(--rust);font-weight:700;margin-left:2px}
 
 /* inputs */
 .res-form input,

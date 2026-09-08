@@ -16,7 +16,7 @@
    4. Copy the generated URL and paste it into SPECIALS_SHEET_URL below.
    Date can be YYYY-MM-DD, M/D/YYYY, or D/M/YYYY - all supported.
    ============================================================ */
-const SPECIALS_SHEET_URL = 'https://script.google.com/macros/s/AKfycby0SuBSdRwbCsqC-DrsGHtaz0FEL-U31KnpwwV4paF8gvY6udX-SrgYSvuao8CzlhGMUg/exec';
+const SPECIALS_SHEET_URL = 'https://script.google.com/macros/s/AKfycbxYodouBNDZ4RJ-gMUkhbfl0-_goTmOrhq3nfS_eE7UDrU3ijd-owyG3SWiSJEzNJml/exec';
 
 // ── Google Review link — change this one value to update every button & QR code
 const REVIEW_URL = 'https://customersreviewforus.com/bikes-barrels-biryani-n-grill/';
@@ -409,12 +409,26 @@ if (barsSection) {
 /* ---------- Reservation form ---------- */
 
 // Paste your deployed Apps Script URL here (see reservation-apps-script.js for setup steps)
-const RESERVATION_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycby0SuBSdRwbCsqC-DrsGHtaz0FEL-U31KnpwwV4paF8gvY6udX-SrgYSvuao8CzlhGMUg/exec';
+const RESERVATION_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxYodouBNDZ4RJ-gMUkhbfl0-_goTmOrhq3nfS_eE7UDrU3ijd-owyG3SWiSJEzNJml/exec';
 
 // Set minimum date to today
 const resDateInput = document.getElementById('resDate');
 if (resDateInput) {
   resDateInput.setAttribute('min', new Date().toISOString().split('T')[0]);
+}
+
+// Phone: allow only digits, spaces, +, -, (, )
+const resPhoneInput = document.getElementById('resPhone');
+if (resPhoneInput) {
+  resPhoneInput.addEventListener('input', function () {
+    this.value = this.value.replace(/[^0-9\s\(\)\-\+]/g, '');
+  });
+  resPhoneInput.addEventListener('keydown', function (e) {
+    const allowed = ['Backspace','Delete','Tab','Enter','ArrowLeft','ArrowRight','Home','End'];
+    if (!allowed.includes(e.key) && !/^[0-9\s\(\)\-\+]$/.test(e.key)) {
+      e.preventDefault();
+    }
+  });
 }
 
 const reservationForm = document.getElementById('reservationForm');
