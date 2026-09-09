@@ -629,8 +629,8 @@ if (reviewStarsEl) {
       // Funnel routing
       setTimeout(() => {
         if (reviewRating >= 4) {
-          document.getElementById('reviewGoogleBtn').href = GOOGLE_REVIEW_URL;
-          showReviewStep('reviewStep2Positive');
+          window.open(GOOGLE_REVIEW_URL, '_blank', 'noopener,noreferrer');
+          closeReviewModal();
         } else {
           showReviewStep('reviewStep2Negative');
         }
@@ -666,11 +666,11 @@ if (reviewFeedbackForm) {
         method: 'POST',
         mode:   'no-cors',
         body:   JSON.stringify({
-          type:         'catering',
+          type:    'review',
           name,
           email,
-          subject:      `${stars} Customer Feedback (${reviewRating} star${reviewRating === 1 ? '' : 's'})`,
-          eventDetails: message
+          rating:  reviewRating,
+          message
         })
       });
       await new Promise(r => setTimeout(r, 600));

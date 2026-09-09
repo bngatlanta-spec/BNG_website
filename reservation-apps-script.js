@@ -14,7 +14,7 @@
  *            type: "catering"    → saves to Catering sheet + emails
  */
 
-const OWNER_EMAIL       = 'saikiran31520@gmail.com';
+const OWNER_EMAIL       = 'Bngatlanta@gmail.com';
 const SPECIALS_SHEET    = 'Specials';
 const RESERVATION_SHEET = 'Reservations';
 const CATERING_SHEET    = 'Catering Enquiries';
@@ -44,6 +44,7 @@ function doGet(e) {
 function doPost(e) {
   try {
     const p = JSON.parse(e.postData.contents);
+    if (p.type === 'review')   return handleReview(p);
     if (p.type === 'catering') return handleCatering(p);
     if (p.type === 'contact')  return handleContact(p);
     return handleReservation(p);
@@ -102,6 +103,37 @@ function handleReservation(p) {
         `2590 Spring Rd SE, Smyrna, GA 30080`
     });
   }
+
+  return json({ success: true });
+}
+
+// ── Customer Review ───────────────────────────────────────────────────────────
+function handleReview(p) {
+  const ss    = SpreadsheetApp.getActiveSpreadsheet();
+  let   sheet = ss.getSheetByName('Customer Reviews');
+  if (!sheet) {
+    sheet = ss.insertSheet('Customer Reviews');
+    const h = ['Timestamp','Name','Email','Rating','Message'];
+    sheet.appendRow(h);
+    sheet.getRange(1,1,1,h.length).setFontWeight('bold').setBackground('#f5c46b');
+    sheet.setFrozenRows(1);
+  }
+
+  const ts    = now();
+  const stars = '⭐'.repeat(p.rating);
+  sheet.appendRow([ts, p.name || 'Anonymous', p.email || '', p.rating, p.message]);
+
+  MailApp.sendEmail({
+    to:      OWNER_EMAIL,
+    subject: `New Customer Review: ${stars} (${p.rating} star${p.rating === 1 ? '' : 's'}) — ${p.name || 'Anonymous'}`,
+    body:
+      `New review submitted from biryani-n-grill.com\n\n` +
+      `Rating:  ${stars} (${p.rating} out of 5)\n` +
+      `Name:    ${p.name || 'Anonymous'}\n` +
+      `Email:   ${p.email || 'Not provided'}\n\n` +
+      `Feedback:\n${p.message}\n\n` +
+      `Submitted: ${ts} ET`
+  });
 
   return json({ success: true });
 }
