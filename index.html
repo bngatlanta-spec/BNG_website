@@ -428,7 +428,7 @@
   <div class="section-wrap">
     <div class="section-head reveal">
       <span class="eyebrow">OUR MENU</span>
-      <h2 class="section-title">Flavours You&rsquo;ll <em>Crave.</em></h2>
+      <h2 class="section-title">Our Most <em>Popular Dishes</em></h2>
       <p class="section-sub">Authentic Hyderabadi &amp; Modern Indian &middot; $10&ndash;30 per person</p>
     </div>
 
@@ -1323,8 +1323,8 @@
     <div class="footer-social">
       <h5>Follow</h5>
       <div class="socials">
-        <a href="#" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M7 2h10a5 5 0 015 5v10a5 5 0 01-5 5H7a5 5 0 01-5-5V7a5 5 0 015-5zm0 2a3 3 0 00-3 3v10a3 3 0 003 3h10a3 3 0 003-3V7a3 3 0 00-3-3H7zm5 3a5 5 0 110 10 5 5 0 010-10zm0 2a3 3 0 100 6 3 3 0 000-6zm5.5-.5a1 1 0 110 2 1 1 0 010-2z"/></svg></a>
-        <a href="#" aria-label="Facebook"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M13 22v-8h3l1-4h-4V7c0-1.1.9-2 2-2h2V1h-3a5 5 0 00-5 5v4H6v4h3v8h4z"/></svg></a>
+        <a href="https://www.instagram.com/bikesandbarrels_biryaningrill" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M7 2h10a5 5 0 015 5v10a5 5 0 01-5 5H7a5 5 0 01-5-5V7a5 5 0 015-5zm0 2a3 3 0 00-3 3v10a3 3 0 003 3h10a3 3 0 003-3V7a3 3 0 00-3-3H7zm5 3a5 5 0 110 10 5 5 0 010-10zm0 2a3 3 0 100 6 3 3 0 000-6zm5.5-.5a1 1 0 110 2 1 1 0 010-2z"/></svg></a>
+        <a href="https://www.facebook.com/bngsmyrna/" target="_blank" rel="noopener noreferrer" aria-label="Facebook"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M13 22v-8h3l1-4h-4V7c0-1.1.9-2 2-2h2V1h-3a5 5 0 00-5 5v4H6v4h3v8h4z"/></svg></a>
         <a href="#" aria-label="Google Maps"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C7 2 3 6 3 11c0 6 9 11 9 11s9-5 9-11c0-5-4-9-9-9zm0 12a3 3 0 110-6 3 3 0 010 6z"/></svg></a>
       </div>
 
@@ -1371,6 +1371,71 @@
   </div>
 
   <div class="notif-preview-badge" id="notifPreviewBadge" hidden>PREVIEW</div>
+</div>
+
+<!-- REVIEW MODAL -->
+<div id="reviewModal" class="review-modal" role="dialog" aria-modal="true" aria-labelledby="reviewModalTitle" hidden>
+  <div class="review-modal-backdrop" id="reviewModalBackdrop"></div>
+  <div class="review-modal-panel">
+    <button class="review-modal-close" id="reviewModalClose" aria-label="Close">&times;</button>
+
+    <!-- Step 1: Star rating -->
+    <div id="reviewStep1" class="review-step">
+      <div class="review-modal-icon-wrap">&#9733;</div>
+      <h2 class="review-modal-title" id="reviewModalTitle">How was your experience?</h2>
+      <p class="review-modal-sub">Tap a star to rate your visit to Bikes &amp; Barrels</p>
+      <div class="review-stars" id="reviewStars" role="group" aria-label="Star rating">
+        <button class="review-star" data-value="1" aria-label="1 star">&#9733;</button>
+        <button class="review-star" data-value="2" aria-label="2 stars">&#9733;</button>
+        <button class="review-star" data-value="3" aria-label="3 stars">&#9733;</button>
+        <button class="review-star" data-value="4" aria-label="4 stars">&#9733;</button>
+        <button class="review-star" data-value="5" aria-label="5 stars">&#9733;</button>
+      </div>
+    </div>
+
+    <!-- Step 2a: High rating (4–5 stars) → Google Reviews -->
+    <div id="reviewStep2Positive" class="review-step" hidden>
+      <div class="review-modal-icon-wrap review-icon-positive">&#127881;</div>
+      <h2 class="review-modal-title">We're so glad you loved it!</h2>
+      <p class="review-modal-sub">Would you mind sharing your experience on Google? It means the world to us.</p>
+      <a id="reviewGoogleBtn" href="https://www.google.com/maps/place//@33.8827685,-84.4780881,17z/data=!3m1!4b1!4m3!3m2!1s0x88f511887c19cbf5:0xb5fce78691f757ec!12e1?entry=ttu" target="_blank" rel="noopener" class="review-google-btn">Leave a Google Review &#8594;</a>
+      <button class="review-skip-link" id="reviewSkipGoogle">Maybe later</button>
+    </div>
+
+    <!-- Step 2b: Low rating (1–3 stars) → Private feedback -->
+    <div id="reviewStep2Negative" class="review-step" hidden>
+      <div class="review-modal-icon-wrap">&#128172;</div>
+      <h2 class="review-modal-title">We're sorry to hear that</h2>
+      <p class="review-modal-sub">Help us improve — your feedback goes directly to our team.</p>
+      <form id="reviewFeedbackForm" class="review-feedback-form" novalidate>
+        <div class="review-field">
+          <label for="reviewFeedbackName">Name <span class="res-optional">(optional)</span></label>
+          <input type="text" id="reviewFeedbackName" placeholder="Your name" autocomplete="name" />
+        </div>
+        <div class="review-field">
+          <label for="reviewFeedbackEmail">Email <span class="res-optional">(optional)</span></label>
+          <input type="email" id="reviewFeedbackEmail" placeholder="your@email.com" autocomplete="email" />
+        </div>
+        <div class="review-field">
+          <label for="reviewFeedbackMsg">What could we do better? <span class="res-required">*</span></label>
+          <textarea id="reviewFeedbackMsg" rows="4" placeholder="Tell us what happened&#8230;"></textarea>
+        </div>
+        <p id="reviewFeedbackError" class="review-feedback-error" hidden>Please share your feedback before sending.</p>
+        <button type="submit" class="review-feedback-submit" id="reviewFeedbackBtn">
+          <span id="reviewFeedbackBtnLabel">Send Feedback</span>
+        </button>
+      </form>
+    </div>
+
+    <!-- Step 3: Feedback sent -->
+    <div id="reviewStep3" class="review-step" hidden>
+      <div class="review-modal-icon-wrap review-icon-positive">&#10003;</div>
+      <h2 class="review-modal-title">Thank you for the feedback</h2>
+      <p class="review-modal-sub">Our team will read every word. We appreciate you giving us the chance to improve.</p>
+      <button class="review-modal-done" id="reviewDoneBtn">Close</button>
+    </div>
+
+  </div>
 </div>
 
 <script src="js/script.js"></script>

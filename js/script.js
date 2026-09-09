@@ -18,11 +18,13 @@
    ============================================================ */
 const SPECIALS_SHEET_URL = 'https://script.google.com/macros/s/AKfycbxYodouBNDZ4RJ-gMUkhbfl0-_goTmOrhq3nfS_eE7UDrU3ijd-owyG3SWiSJEzNJml/exec';
 
-// ── Google Review link — change this one value to update every button & QR code
-const REVIEW_URL = 'https://customersreviewforus.com/bikes-barrels-biryani-n-grill/';
+// ── Google Review URL — used when customer rates 4 or 5 stars
+const GOOGLE_REVIEW_URL = 'https://www.google.com/maps/place//@33.8827685,-84.4780881,17z/data=!3m1!4b1!4m3!3m2!1s0x88f511887c19cbf5:0xb5fce78691f757ec!12e1?entry=ttu';
 
-// Wire all review buttons to REVIEW_URL
-document.querySelectorAll('.review-link').forEach(el => { el.href = REVIEW_URL; });
+// Wire all review buttons to open the review modal
+document.querySelectorAll('.review-link').forEach(el => {
+  el.addEventListener('click', function (e) { e.preventDefault(); openReviewModal(); });
+});
 
 function parseCSV(text) {
   const lines = text.replace(/\r/g, '').trim().split('\n');
@@ -563,3 +565,121 @@ document.getElementById('catResetBtn')?.addEventListener('click', function () {
   wrap.hidden = false;
   wrap.scrollIntoView({ behavior: 'smooth', block: 'start' });
 });
+
+/* ---------- Review Modal ---------- */
+
+let reviewRating = 0;
+
+function openReviewModal() {
+  reviewRating = 0;
+  showReviewStep('reviewStep1');
+  document.querySelectorAll('.review-star').forEach(s => s.classList.remove('selected','hovered'));
+  document.getElementById('reviewModal').hidden = false;
+  document.body.style.overflow = 'hidden';
+}
+
+function closeReviewModal() {
+  document.getElementById('reviewModal').hidden = true;
+  document.body.style.overflow = '';
+}
+
+function showReviewStep(id) {
+  ['reviewStep1','reviewStep2Positive','reviewStep2Negative','reviewStep3'].forEach(s => {
+    const el = document.getElementById(s);
+    if (el) el.hidden = (s !== id);
+  });
+}
+
+// Close buttons
+document.getElementById('reviewModalClose')?.addEventListener('click', closeReviewModal);
+document.getElementById('reviewModalBackdrop')?.addEventListener('click', closeReviewModal);
+document.getElementById('reviewSkipGoogle')?.addEventListener('click', closeReviewModal);
+document.getElementById('reviewDoneBtn')?.addEventListener('click', closeReviewModal);
+
+// Close on Escape
+document.addEventListener('keydown', function (e) {
+  if (e.key === 'Escape' && !document.getElementById('reviewModal')?.hidden) closeReviewModal();
+});
+
+// Star hover and select
+const reviewStarsEl = document.getElementById('reviewStars');
+if (reviewStarsEl) {
+  const stars = reviewStarsEl.querySelectorAll('.review-star');
+
+  stars.forEach(star => {
+    star.addEventListener('mouseenter', function () {
+      const val = Number(this.dataset.value);
+      stars.forEach(s => {
+        s.classList.toggle('hovered', Number(s.dataset.value) <= val);
+      });
+    });
+  });
+
+  reviewStarsEl.addEventListener('mouseleave', function () {
+    stars.forEach(s => s.classList.remove('hovered'));
+  });
+
+  stars.forEach(star => {
+    star.addEventListener('click', function () {
+      reviewRating = Number(this.dataset.value);
+      stars.forEach(s => {
+        s.classList.toggle('selected', Number(s.dataset.value) <= reviewRating);
+        s.classList.remove('hovered');
+      });
+      // Funnel routing
+      setTimeout(() => {
+        if (reviewRating >= 4) {
+          document.getElementById('reviewGoogleBtn').href = GOOGLE_REVIEW_URL;
+          showReviewStep('reviewStep2Positive');
+        } else {
+          showReviewStep('reviewStep2Negative');
+        }
+      }, 280);
+    });
+  });
+}
+
+// Negative feedback form
+const reviewFeedbackForm = document.getElementById('reviewFeedbackForm');
+if (reviewFeedbackForm) {
+  reviewFeedbackForm.addEventListener('submit', async function (e) {
+    e.preventDefault();
+
+    const name    = (document.getElementById('reviewFeedbackName')?.value || '').trim() || 'Anonymous';
+    const email   = (document.getElementById('reviewFeedbackEmail')?.value || '').trim();
+    const message = (document.getElementById('reviewFeedbackMsg')?.value || '').trim();
+    const errEl   = document.getElementById('reviewFeedbackError');
+    const btn     = document.getElementById('reviewFeedbackBtn');
+    const label   = document.getElementById('reviewFeedbackBtnLabel');
+
+    if (!message) {
+      errEl.hidden = false;
+      return;
+    }
+    errEl.hidden = true;
+    btn.disabled = true;
+    label.textContent = 'Sending…';
+
+    const stars = '⭐'.repeat(reviewRating);
+    try {
+      fetch(RESERVATION_SCRIPT_URL, {
+        method: 'POST',
+        mode:   'no-cors',
+        body:   JSON.stringify({
+          type:         'catering',
+          name,
+          email,
+          subject:      `${stars} Customer Feedback (${reviewRating} star${reviewRating === 1 ? '' : 's'})`,
+          eventDetails: message
+        })
+      });
+      await new Promise(r => setTimeout(r, 600));
+      showReviewStep('reviewStep3');
+    } catch {
+      showReviewStep('reviewStep3');
+    } finally {
+      btn.disabled      = false;
+      label.textContent = 'Send Feedback';
+    }
+  });
+}
