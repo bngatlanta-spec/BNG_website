@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Leave a Review — Bikes &amp; Barrels Biryani N Grill</title>
+  <link rel="icon" type="image/webp" href="images/favicon-logo.webp" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:        #0e0a08;
+      --bg-card:   #1c1513;
+      --cream:     #f5ebd8;
+      --cream-soft:#e8dcc4;
+      --gold:      #e8a33d;
+      --gold-2:    #f5c46b;
+      --rust:      #c1440e;
+      --rust-2:    #e35d19;
+      --muted:     #8a7a6a;
+      --ff-serif:  'Playfair Display', serif;
+      --ff-sans:   'Poppins', sans-serif;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--cream);
+      font-family: var(--ff-sans);
+      min-height: 100dvh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 24px 16px;
+    }
+
+    .page-wrap {
+      width: 100%;
+      max-width: 420px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 28px;
+    }
+
+    /* Logo */
+    .logo-wrap {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+    }
+    .logo-wrap img {
+      width: 160px;
+      height: auto;
+    }
+    .logo-tagline {
+      font-size: .78rem;
+      color: var(--muted);
+      letter-spacing: .06em;
+      text-transform: uppercase;
+    }
+
+    /* Card */
+    .review-card {
+      background: var(--bg-card);
+      border: 1px solid rgba(232,163,61,.15);
+      border-radius: 16px;
+      padding: 36px 28px 32px;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 14px;
+      text-align: center;
+    }
+
+    .step { display: flex; flex-direction: column; align-items: center; gap: 14px; width: 100%; }
+    .step[hidden] { display: none !important; }
+
+    .step-icon { font-size: 2.6rem; color: var(--gold); line-height: 1; }
+    .step-icon.positive { color: #4caf7d; }
+
+    .step-title {
+      font-family: var(--ff-serif);
+      font-size: clamp(1.2rem, 5vw, 1.5rem);
+      color: var(--cream);
+    }
+    .step-sub {
+      font-size: .93rem;
+      color: var(--cream-soft);
+      line-height: 1.65;
+      max-width: 320px;
+    }
+
+    /* Stars */
+    .stars-row {
+      display: flex;
+      gap: 8px;
+      margin: 6px 0 2px;
+    }
+    .star-btn {
+      background: none;
+      border: none;
+      font-size: 2.8rem;
+      color: rgba(232,163,61,.25);
+      cursor: pointer;
+      padding: 4px;
+      line-height: 1;
+      transition: color .15s, transform .15s, opacity .15s;
+    }
+    .star-btn.hovered, .star-btn.selected { color: var(--gold); }
+    .star-btn:hover { transform: scale(1.18); }
+
+    /* Google btn */
+    .google-btn {
+      display: inline-block;
+      background: linear-gradient(135deg, var(--gold), var(--rust-2));
+      color: #fff;
+      font-family: var(--ff-sans);
+      font-weight: 600;
+      font-size: 1rem;
+      padding: 14px 28px;
+      border-radius: 50px;
+      text-decoration: none;
+      margin-top: 6px;
+      transition: opacity .2s;
+      width: 100%;
+    }
+    .google-btn:hover { opacity: .88; }
+
+    /* Feedback form */
+    .feedback-form {
+      width: 100%;
+      text-align: left;
+      display: flex;
+      flex-direction: column;
+      gap: 13px;
+      margin-top: 4px;
+    }
+    .field label {
+      display: block;
+      font-size: .8rem;
+      font-weight: 600;
+      letter-spacing: .05em;
+      text-transform: uppercase;
+      color: var(--cream-soft);
+      margin-bottom: 5px;
+    }
+    .field input, .field textarea {
+      width: 100%;
+      background: rgba(255,255,255,.05);
+      border: 1px solid rgba(232,163,61,.2);
+      border-radius: 8px;
+      color: var(--cream);
+      font-family: var(--ff-sans);
+      font-size: .95rem;
+      padding: 11px 14px;
+      outline: none;
+      transition: border-color .2s;
+    }
+    .field input:focus, .field textarea:focus {
+      border-color: var(--gold);
+    }
+    .field textarea { resize: vertical; min-height: 100px; }
+    .required { color: var(--rust); font-weight: 700; margin-left: 2px; }
+
+    .form-error {
+      color: var(--rust-2);
+      font-size: .85rem;
+    }
+
+    .submit-btn {
+      width: 100%;
+      background: linear-gradient(135deg, var(--gold), var(--rust-2));
+      color: #fff;
+      border: none;
+      border-radius: 50px;
+      font-family: var(--ff-sans);
+      font-weight: 600;
+      font-size: 1rem;
+      padding: 14px;
+      cursor: pointer;
+      transition: opacity .2s;
+      margin-top: 4px;
+    }
+    .submit-btn:hover { opacity: .88; }
+    .submit-btn:disabled { opacity: .5; cursor: not-allowed; }
+
+    /* Done btn */
+    .done-btn {
+      background: transparent;
+      border: 1.5px solid var(--gold);
+      color: var(--gold);
+      border-radius: 50px;
+      font-family: var(--ff-sans);
+      font-weight: 600;
+      font-size: .95rem;
+      padding: 12px 36px;
+      cursor: pointer;
+      margin-top: 6px;
+      transition: background .2s, color .2s;
+    }
+    .done-btn:hover { background: var(--gold); color: #0e0a08; }
+
+    /* Footer */
+    .page-footer {
+      font-size: .78rem;
+      color: var(--muted);
+      text-align: center;
+      line-height: 1.6;
+    }
+    .page-footer a { color: var(--muted); text-decoration: underline; }
+
+    @media (max-width: 480px) {
+      .review-card { padding: 28px 18px 24px; }
+      .star-btn { font-size: 2.3rem; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="page-wrap">
+
+  <!-- Logo -->
+  <div class="logo-wrap">
+    <img src="images/logo-transparent.png" alt="Bikes &amp; Barrels Biryani N Grill" />
+    <span class="logo-tagline">Smyrna, GA</span>
+  </div>
+
+  <!-- Review card -->
+  <div class="review-card">
+
+    <!-- Step 1: Star rating -->
+    <div class="step" id="step1">
+      <div class="step-icon">&#9733;</div>
+      <h1 class="step-title">How was your experience?</h1>
+      <p class="step-sub">Tap a star to rate your visit to Bikes &amp; Barrels</p>
+      <div class="stars-row" id="starsRow" role="group" aria-label="Star rating">
+        <button class="star-btn" data-value="1" aria-label="1 star">&#9733;</button>
+        <button class="star-btn" data-value="2" aria-label="2 stars">&#9733;</button>
+        <button class="star-btn" data-value="3" aria-label="3 stars">&#9733;</button>
+        <button class="star-btn" data-value="4" aria-label="4 stars">&#9733;</button>
+        <button class="star-btn" data-value="5" aria-label="5 stars">&#9733;</button>
+      </div>
+    </div>
+
+    <!-- Step 2b: Low rating (1–3 stars) → Private feedback -->
+    <div class="step" id="step2Negative" hidden>
+      <div class="step-icon">&#128172;</div>
+      <h2 class="step-title">We're sorry to hear that</h2>
+      <p class="step-sub">Help us improve — your feedback goes directly to our team.</p>
+      <form class="feedback-form" id="feedbackForm" novalidate>
+        <div class="field">
+          <label for="fbName">Name</label>
+          <input type="text" id="fbName" placeholder="Your name" autocomplete="name" />
+        </div>
+        <div class="field">
+          <label for="fbEmail">Email</label>
+          <input type="email" id="fbEmail" placeholder="your@email.com" autocomplete="email" />
+        </div>
+        <div class="field">
+          <label for="fbMsg">What could we do better? <span class="required">*</span></label>
+          <textarea id="fbMsg" rows="4" placeholder="Tell us what happened&#8230;"></textarea>
+        </div>
+        <p class="form-error" id="fbError" hidden>Please share your feedback before sending.</p>
+        <button type="submit" class="submit-btn" id="fbBtn">
+          <span id="fbBtnLabel">Send Feedback</span>
+        </button>
+      </form>
+    </div>
+
+    <!-- Step 3: Thank you -->
+    <div class="step" id="step3" hidden>
+      <div class="step-icon positive">&#10003;</div>
+      <h2 class="step-title">Thank you for the feedback</h2>
+      <p class="step-sub">Our team will read every word. We appreciate you giving us the chance to improve.</p>
+      <button class="done-btn" id="doneBtn">Done</button>
+    </div>
+
+  </div>
+
+  <!-- Footer -->
+  <p class="page-footer">
+    Bikes &amp; Barrels — Biryani N Grill<br />
+    2590 Spring Rd SE, Smyrna, GA 30080<br />
+    <a href="tel:+16782935779">(678) 293-5779</a>
+  </p>
+
+</div>
+
+<script>
+  const GOOGLE_REVIEW_URL   = 'https://www.google.com/maps/place//@33.8827685,-84.4780881,17z/data=!3m1!4b1!4m3!3m2!1s0x88f511887c19cbf5:0xb5fce78691f757ec!12e1?entry=ttu';
+  const RESERVATION_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxYodouBNDZ4RJ-gMUkhbfl0-_goTmOrhq3nfS_eE7UDrU3ijd-owyG3SWiSJEzNJml/exec';
+
+  let rating = 0;
+
+  function showStep(id) {
+    ['step1','step2Negative','step3'].forEach(s => {
+      document.getElementById(s).hidden = (s !== id);
+    });
+  }
+
+  // Stars
+  const starsRow = document.getElementById('starsRow');
+  const starBtns = starsRow.querySelectorAll('.star-btn');
+
+  starBtns.forEach(btn => {
+    btn.addEventListener('mouseenter', () => {
+      const val = Number(btn.dataset.value);
+      starBtns.forEach(s => s.classList.toggle('hovered', Number(s.dataset.value) <= val));
+    });
+  });
+  starsRow.addEventListener('mouseleave', () => {
+    starBtns.forEach(s => s.classList.remove('hovered'));
+  });
+
+  starBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      rating = Number(btn.dataset.value);
+      starBtns.forEach(s => {
+        s.classList.toggle('selected', Number(s.dataset.value) <= rating);
+        s.classList.remove('hovered');
+      });
+      setTimeout(() => {
+        if (rating >= 4) {
+          window.location.href = GOOGLE_REVIEW_URL;
+        } else {
+          showStep('step2Negative');
+        }
+      }, 280);
+    });
+  });
+
+  // Feedback form
+  document.getElementById('feedbackForm').addEventListener('submit', async function (e) {
+    e.preventDefault();
+    const name    = (document.getElementById('fbName').value || '').trim() || 'Anonymous';
+    const email   = (document.getElementById('fbEmail').value || '').trim();
+    const message = (document.getElementById('fbMsg').value || '').trim();
+    const errEl   = document.getElementById('fbError');
+    const btn     = document.getElementById('fbBtn');
+    const label   = document.getElementById('fbBtnLabel');
+
+    if (!message) { errEl.hidden = false; return; }
+    errEl.hidden = true;
+    btn.disabled = true;
+    label.textContent = 'Sending…';
+
+    try {
+      const stars = '⭐'.repeat(rating);
+      fetch(RESERVATION_SCRIPT_URL, {
+        method: 'POST',
+        mode:   'no-cors',
+        body:   JSON.stringify({
+          type:         'catering',
+          name,
+          email,
+          subject:      `${stars} Customer Review (${rating} star${rating === 1 ? '' : 's'})`,
+          eventDetails: message
+        })
+      });
+      await new Promise(r => setTimeout(r, 600));
+      showStep('step3');
+    } catch {
+      showStep('step3');
+    } finally {
+      btn.disabled = false;
+      label.textContent = 'Send Feedback';
+    }
+  });
+
+  // Done button → go to home page
+  document.getElementById('doneBtn').addEventListener('click', () => {
+    window.location.href = 'index.html';
+  });
+</script>
+</body>
+</html>

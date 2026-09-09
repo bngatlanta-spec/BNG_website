@@ -21,9 +21,9 @@ const SPECIALS_SHEET_URL = 'https://script.google.com/macros/s/AKfycbxYodouBNDZ4
 // ── Google Review URL — used when customer rates 4 or 5 stars
 const GOOGLE_REVIEW_URL = 'https://www.google.com/maps/place//@33.8827685,-84.4780881,17z/data=!3m1!4b1!4m3!3m2!1s0x88f511887c19cbf5:0xb5fce78691f757ec!12e1?entry=ttu';
 
-// Wire all review buttons to open the review modal
+// Wire all review buttons to navigate to the review page
 document.querySelectorAll('.review-link').forEach(el => {
-  el.addEventListener('click', function (e) { e.preventDefault(); openReviewModal(); });
+  el.addEventListener('click', function (e) { e.preventDefault(); window.location.href = 'review.html'; });
 });
 
 function parseCSV(text) {
@@ -666,11 +666,11 @@ if (reviewFeedbackForm) {
         method: 'POST',
         mode:   'no-cors',
         body:   JSON.stringify({
-          type:    'review',
+          type:         'catering',
           name,
           email,
-          rating:  reviewRating,
-          message
+          subject:      `${stars} Customer Review (${reviewRating} star${reviewRating === 1 ? '' : 's'})`,
+          eventDetails: message
         })
       });
       await new Promise(r => setTimeout(r, 600));
